@@ -29,6 +29,8 @@ public class MainScript : MonoBehaviour
     void Start()
     {
 
+        Application.targetFrameRate = 30;
+
         shuffleButton.onClick.AddListener(()=>{
             var m = int.Parse(HandicapText.text);
             var r = getRandom(10 - m);
