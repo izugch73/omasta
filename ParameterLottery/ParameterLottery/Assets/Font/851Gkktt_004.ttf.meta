@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: de7d4b971f94f48e39bbe7196fa1ed5a
+guid: 58e8d814b535d481182ca8cd63cbe375
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Ro GSan Serif Std
+  fontName: 851Gkktt
   fontNames:
-  - Ro GSan Serif Std
+  - 851Gkktt
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
