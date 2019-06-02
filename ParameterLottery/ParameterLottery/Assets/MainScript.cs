@@ -65,33 +65,40 @@ public class MainScript : MonoBehaviour
             return null;
         }
        
-        var flag = true;
+        var IsRepeat = true;
 
         int spd = 0;
         int scl = 0;
         int chg = 0;
         int sld = 0;
+        int remaining = maxval;
 
         int cnt = 0;
-        while(flag){
-            spd = Random.Range(1,6);
-            scl = Random.Range(1,6);
-            chg = Random.Range(1,6);
-            sld = Random.Range(1,6);
+        do
+        {
             cnt++;
-
-            if( spd + scl + chg + sld == maxval){
-                flag = false;
-                
-                if( isShield1Flag && sld != 1){
-                    flag = true;
-                }
-                if( isUltimateFlag && new int[]{spd,scl,chg,sld}.Max() != 5){
-                    flag = true;
-                }
+            spd = Random.Range(1,6);
+            remaining -= spd;
+            scl = Random.Range(1, remaining > 5 ? 6 : remaining + 1);
+            remaining -= scl;
+            chg = Random.Range(1, remaining > 5 ? 6 : remaining + 1);
+            remaining -= chg;
+            if( remaining > 5 || remaining <= 0){
+                remaining = maxval;
+                continue;
             }
-        }
+            sld = remaining;
+            IsRepeat = false;
+    
+            if( isShield1Flag && sld != 1){
+                IsRepeat = true;
+            }
+            if( isUltimateFlag && new int[]{spd,scl,chg,sld}.Max() != 5){
+                IsRepeat = true;
+            }
 
+        } while(IsRepeat);
+        
         Debug.Log(cnt + " times");
         
         string[] array = new string[4];
