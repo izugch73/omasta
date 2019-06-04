@@ -33,7 +33,7 @@ public class MainScript : MonoBehaviour
 
         shuffleButton.onClick.AddListener(()=>{
             var m = int.Parse(HandicapText.text);
-            var r = getRandom(10 - m);
+            var r = getRandomStatus(10 - m);
             if(r == null){
                 shuffleButtonText.text = "それは無理やわ";
                 return;
@@ -56,72 +56,37 @@ public class MainScript : MonoBehaviour
         
     }
 
+    private string[] getRandomStatus(int maxval){
 
-    private string[] getRandom(int maxval){
-
-        var isShield1Flag = isShield1.isOn;
-        var isUltimateFlag = isUltimate.isOn;
-
-        if( isUltimateFlag && maxval < 8 ){
-            //　それは無理
+        if( isUltimate.isOn && maxval < 8 ){
             return null;
         }
 
         var status = new int[]{1,1,1,1};
-        int cnt = 0;
+        var randMax = isShield1.isOn ? 3 : 4;
 
-        if( !isUltimateFlag )
-        {
-
-            var randMax = isShield1Flag ? 3 : 4;
-
-            for (int i = 0; i < maxval - 4; i++)
-            {
-
-                int target = Random.Range(0, randMax);
-                
-                while( status[target] >= 5 )
-                {
-                    cnt++;
-                    target = Random.Range(0, randMax);
-                }
-
-                status[target] += 1;
-
-            }
-
-        }
-        else
-        {
-
-            var randMax = isShield1Flag ? 3 : 4;
-
+        if( isUltimate.isOn ){
             status[Random.Range(0, randMax)] = 5;
-
-            for (int i = 0; i < maxval - 8; i++)
-            {
-
-                int target = Random.Range(0, randMax);
-                
-                while( status[target] >= 5 )
-                {
-                    cnt++;
-                    target = Random.Range(0, randMax);
-                }
-
-                status[target] += 1;
-
-            }
-
         }
-       
-        Debug.Log(cnt + " times");
+
+        var maxLoop = isUltimate.isOn ? maxval - 8 : maxval - 4;
+
+        for (int i = 0; i < maxLoop; i++)
+        {
+            int target = 0;
+            do {
+                target = Random.Range(0, randMax);
+            }
+            while( status[target] >= 5 );
+            status[target] += 1;
+        }
         
-        string[] array = new string[4];
-        array[0] = status[0].ToString();
-        array[1] = status[1].ToString();
-        array[2] = status[2].ToString();
-        array[3] = status[3].ToString();
+        var array = new string[]{
+            status[0].ToString(),
+            status[1].ToString(),
+            status[2].ToString(),
+            status[3].ToString()            
+        };
 
         return array;
 
