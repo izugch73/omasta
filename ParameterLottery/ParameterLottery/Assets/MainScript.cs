@@ -66,48 +66,62 @@ public class MainScript : MonoBehaviour
             //　それは無理
             return null;
         }
-       
-        var IsRepeat = true;
 
-        int spd = 0;
-        int scl = 0;
-        int chg = 0;
-        int sld = 0;
-        int remaining = maxval;
-
+        var status = new int[]{1,1,1,1};
         int cnt = 0;
-        do
+
+        if( !isUltimateFlag )
         {
-            cnt++;
-            spd = Random.Range(1,6);
-            remaining -= spd;
-            scl = Random.Range(1, remaining > 5 ? 6 : remaining + 1);
-            remaining -= scl;
-            chg = Random.Range(1, remaining > 5 ? 6 : remaining + 1);
-            remaining -= chg;
-            if( remaining > 5 || remaining <= 0){
-                remaining = maxval;
-                continue;
-            }
-            sld = remaining;
-            IsRepeat = false;
-    
-            if( isShield1Flag && sld != 1){
-                IsRepeat = true;
-            }
-            if( isUltimateFlag && new int[]{spd,scl,chg,sld}.Max() != 5){
-                IsRepeat = true;
+
+            var randMax = isShield1Flag ? 3 : 4;
+
+            for (int i = 0; i < maxval - 4; i++)
+            {
+
+                int target = Random.Range(0, randMax);
+                
+                while( status[target] >= 5 )
+                {
+                    cnt++;
+                    target = Random.Range(0, randMax);
+                }
+
+                status[target] += 1;
+
             }
 
-        } while(IsRepeat);
-        
+        }
+        else
+        {
+
+            var randMax = isShield1Flag ? 3 : 4;
+
+            status[Random.Range(0, randMax)] = 5;
+
+            for (int i = 0; i < maxval - 8; i++)
+            {
+
+                int target = Random.Range(0, randMax);
+                
+                while( status[target] >= 5 )
+                {
+                    cnt++;
+                    target = Random.Range(0, randMax);
+                }
+
+                status[target] += 1;
+
+            }
+
+        }
+       
         Debug.Log(cnt + " times");
         
         string[] array = new string[4];
-        array[0] = spd.ToString();
-        array[1] = scl.ToString();
-        array[2] = chg.ToString();
-        array[3] = sld.ToString();
+        array[0] = status[0].ToString();
+        array[1] = status[1].ToString();
+        array[2] = status[2].ToString();
+        array[3] = status[3].ToString();
 
         return array;
 
