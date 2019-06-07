@@ -24,6 +24,8 @@ public class MainScript : MonoBehaviour
     public Slider Handicap;
     public Text HandicapText;
 
+    public GameObject PlasmaBlueOrigin;
+    public GameObject PlasmaRedOrigin;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,20 @@ public class MainScript : MonoBehaviour
             chgBar.fillAmount = int.Parse(r[2]) * 0.2f;
             shield.text = r[3];
             sldBar.fillAmount = int.Parse(r[3]) * 0.2f;
+
+            var teamId = Random.Range(1,3);
+            var ball = GameObject.Instantiate(teamId == 1 ? PlasmaRedOrigin : PlasmaBlueOrigin,
+                new Vector3(
+                    teamId == 1 ? 3f : -3f,
+                    Random.Range(-1f, -3f),
+                    -2f
+                ),
+                teamId == 1 ?Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0)
+            );
+
+            var spd = teamId == 1 ? Random.Range(-200f,-300f) : Random.Range(200f,300f);
+            ball.GetComponent<Rigidbody>().AddForce(spd,0f,0f);
+            Destroy(ball,3f);
         });
 
         Handicap.onValueChanged.AddListener((v) =>{
