@@ -38,7 +38,7 @@ public class MainScript : MonoBehaviour
                 shuffleButtonText.text = "それは無理やわ";
                 return;
             }else{
-                shuffleButtonText.text = "シャッフル!";
+                shuffleButtonText.text = "シャッフル！";
             }
             speed.text = r[0];
             spdBar.fillAmount = int.Parse(r[0]) * 0.2f;
