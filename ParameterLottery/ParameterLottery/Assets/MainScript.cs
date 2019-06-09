@@ -55,7 +55,7 @@ public class MainScript : MonoBehaviour
             var ball = GameObject.Instantiate(teamId == 1 ? PlasmaRedOrigin : PlasmaBlueOrigin,
                 new Vector3(
                     teamId == 1 ? 3f : -3f,
-                    Random.Range(-1f, -3f),
+                    Random.Range(-0.1f, -1.7f),
                     -2f
                 ),
                 teamId == 1 ?Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0)
