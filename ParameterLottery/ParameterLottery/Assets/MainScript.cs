@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UniRx;
 
 public class MainScript : MonoBehaviour
 {
@@ -42,14 +43,18 @@ public class MainScript : MonoBehaviour
             }else{
                 shuffleButtonText.text = "シャッフル！";
             }
+
             speed.text = r[0];
-            spdBar.fillAmount = int.Parse(r[0]) * 0.2f;
+            setAnimation(spdBar, int.Parse(r[0]) * 0.2f);
+
             scale.text = r[1];
-            sclBar.fillAmount = int.Parse(r[1]) * 0.2f;
+            setAnimation(sclBar, int.Parse(r[1]) * 0.2f);
+
             charge.text = r[2];
-            chgBar.fillAmount = int.Parse(r[2]) * 0.2f;
+            setAnimation(chgBar, int.Parse(r[2]) * 0.2f);
+
             shield.text = r[3];
-            sldBar.fillAmount = int.Parse(r[3]) * 0.2f;
+            setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
 
             var teamId = Random.Range(1,3);
             var ball = GameObject.Instantiate(teamId == 1 ? PlasmaRedOrigin : PlasmaBlueOrigin,
@@ -70,6 +75,14 @@ public class MainScript : MonoBehaviour
             HandicapText.text = ((int)v).ToString();
         });
         
+    }
+
+    void setAnimation(Image bar, float toValue){
+        var flame = 15f;
+        var diff = (toValue - bar.fillAmount) / flame;
+        Observable.EveryUpdate().Take((int)flame).Subscribe(_=>{
+            bar.fillAmount += diff;
+        }).AddTo(this);
     }
 
     private string[] getRandomStatus(int maxval){
