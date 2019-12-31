@@ -56,19 +56,19 @@ public class MainScript : MonoBehaviour
             shield.text = r[3];
             setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
 
-            var teamId = Random.Range(1,3);
-            var ball = GameObject.Instantiate(teamId == 1 ? PlasmaRedOrigin : PlasmaBlueOrigin,
-                new Vector3(
-                    teamId == 1 ? 3f : -3f,
-                    Random.Range(-0.1f, -1.7f),
-                    -2f
-                ),
-                teamId == 1 ?Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0)
+            var ball = GameObject.Instantiate(PlasmaBlueOrigin,
+                new Vector3(-3f, -1f, -2f),
+                Quaternion.Euler(0, 90, 0)
             );
 
-            var spd = teamId == 1 ? Random.Range(-200f,-300f) : Random.Range(200f,300f);
+            var spd = 180f;
             ball.GetComponent<Rigidbody>().AddForce(spd,0f,0f);
             Destroy(ball,3f);
+
+            shuffleButton.interactable = false;
+            Observable.Timer(System.TimeSpan.FromSeconds(1.5f)).Subscribe(time=>{
+                shuffleButton.interactable = true;
+            }).AddTo(this);
         });
 
         Handicap.onValueChanged.AddListener((v) =>{
