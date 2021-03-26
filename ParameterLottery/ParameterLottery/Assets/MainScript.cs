@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using Michsky.UI.ModernUIPack;
+using TMPro;
 using UniRx;
 using Random = UnityEngine.Random;
 
@@ -11,7 +13,7 @@ public class MainScript : MonoBehaviour
 {
 
     public Button shuffleButton;
-    public Text shuffleButtonText;
+    public ButtonManagerBasic shuffleButtonText;
     
     public Text speed;
     public Image spdBar;
@@ -25,7 +27,7 @@ public class MainScript : MonoBehaviour
     public Toggle isShield1;
     public Toggle isUltimate;
     public Slider Handicap;
-    public Text HandicapText;
+    // public Text HandicapText;
 
     public GameObject PlasmaBlueOrigin;
     public GameObject PlasmaRedOrigin;
@@ -37,13 +39,14 @@ public class MainScript : MonoBehaviour
         Application.targetFrameRate = 30;
 
         shuffleButton.onClick.AddListener(()=>{
-            var m = int.Parse(HandicapText.text);
+            // var m = int.Parse(HandicapText.text);
+            var m = (int)Handicap.value;
             var r = getRandomStatus(10 - m);
             if(r == null){
-                shuffleButtonText.text = "それは無理やわ";
+                shuffleButtonText.buttonText = "MAKE SURE SETTING";
                 return;
             }else{
-                shuffleButtonText.text = "シャッフル！";
+                shuffleButtonText.buttonText = "SHUFFLE";
             }
 
             speed.text = "-";
@@ -68,7 +71,7 @@ public class MainScript : MonoBehaviour
                 setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
             }).AddTo(this);
 
-            ShootBulletAnimation();
+            // ShootBulletAnimation();
             
             shuffleButton.interactable = false;
             Observable.Timer(System.TimeSpan.FromSeconds(1.5f)).Subscribe(time=>{
@@ -76,9 +79,9 @@ public class MainScript : MonoBehaviour
             }).AddTo(this);
         });
 
-        Handicap.onValueChanged.AddListener((v) =>{
-            HandicapText.text = ((int)v).ToString();
-        });
+        // Handicap.onValueChanged.AddListener((v) =>{
+        //     HandicapText.text = ((int)v).ToString();
+        // });
         
     }
 
