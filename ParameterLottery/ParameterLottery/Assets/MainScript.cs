@@ -27,16 +27,11 @@ public class MainScript : MonoBehaviour
     public Toggle isShield1;
     public Toggle isUltimate;
     public Slider Handicap;
-    // public Text HandicapText;
-
-    public GameObject PlasmaBlueOrigin;
-    public GameObject PlasmaRedOrigin;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
 
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
 
         shuffleButton.onClick.AddListener(()=>{
             // var m = int.Parse(HandicapText.text);
@@ -71,29 +66,11 @@ public class MainScript : MonoBehaviour
                 setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
             }).AddTo(this);
 
-            // ShootBulletAnimation();
-            
             shuffleButton.interactable = false;
             Observable.Timer(System.TimeSpan.FromSeconds(1.5f)).Subscribe(time=>{
                 shuffleButton.interactable = true;
             }).AddTo(this);
         });
-
-        // Handicap.onValueChanged.AddListener((v) =>{
-        //     HandicapText.text = ((int)v).ToString();
-        // });
-        
-    }
-
-    void ShootBulletAnimation()
-    {
-        var ball = Instantiate(PlasmaBlueOrigin,
-            new Vector3(-3f, -1f, -2f),
-            Quaternion.Euler(0, 90, 0)
-        );
-
-        ball.GetComponent<Rigidbody>().AddForce(180f,0f,0f);
-        Destroy(ball,3f);
     }
 
     void setAnimation(Image bar, float toValue){
