@@ -7278,6 +7278,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: Status
       objectReference: {fileID: 0}
+    - target: {fileID: 6511201828043550174, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201828043550174, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -224
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201828043550174, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829085307143, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829085307143, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 226
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829085307143, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829161415743, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829161415743, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -74
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829161415743, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829590301478, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829590301478, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 76
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511201829590301478, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -388
+      objectReference: {fileID: 0}
     - target: {fileID: 7578998925924741380, guid: 2c4986e4bfe8e4c9ab2a05cb342b9711,
         type: 3}
       propertyPath: m_LocalPosition.x

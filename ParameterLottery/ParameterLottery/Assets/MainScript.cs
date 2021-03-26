@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UniRx;
+using Random = UnityEngine.Random;
 
 public class MainScript : MonoBehaviour
 {
@@ -44,27 +46,30 @@ public class MainScript : MonoBehaviour
                 shuffleButtonText.text = "シャッフル！";
             }
 
-            speed.text = r[0];
-            setAnimation(spdBar, int.Parse(r[0]) * 0.2f);
+            speed.text = "-";
+            scale.text = "-";
+            charge.text = "-";
+            shield.text = "-";
 
-            scale.text = r[1];
-            setAnimation(sclBar, int.Parse(r[1]) * 0.2f);
+            setAnimation(spdBar, 0.2f);
+            setAnimation(sclBar, 0.2f);
+            setAnimation(chgBar, 0.2f);
+            setAnimation(sldBar, 0.2f);
 
-            charge.text = r[2];
-            setAnimation(chgBar, int.Parse(r[2]) * 0.2f);
+            Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
+            {
+                speed.text = r[0];
+                setAnimation(spdBar, int.Parse(r[0]) * 0.2f);
+                scale.text = r[1];
+                setAnimation(sclBar, int.Parse(r[1]) * 0.2f);
+                charge.text = r[2];
+                setAnimation(chgBar, int.Parse(r[2]) * 0.2f);
+                shield.text = r[3];
+                setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
+            }).AddTo(this);
 
-            shield.text = r[3];
-            setAnimation(sldBar, int.Parse(r[3]) * 0.2f);
-
-            var ball = GameObject.Instantiate(PlasmaBlueOrigin,
-                new Vector3(-3f, -1f, -2f),
-                Quaternion.Euler(0, 90, 0)
-            );
-
-            var spd = 180f;
-            ball.GetComponent<Rigidbody>().AddForce(spd,0f,0f);
-            Destroy(ball,3f);
-
+            ShootBulletAnimation();
+            
             shuffleButton.interactable = false;
             Observable.Timer(System.TimeSpan.FromSeconds(1.5f)).Subscribe(time=>{
                 shuffleButton.interactable = true;
@@ -75,6 +80,17 @@ public class MainScript : MonoBehaviour
             HandicapText.text = ((int)v).ToString();
         });
         
+    }
+
+    void ShootBulletAnimation()
+    {
+        var ball = Instantiate(PlasmaBlueOrigin,
+            new Vector3(-3f, -1f, -2f),
+            Quaternion.Euler(0, 90, 0)
+        );
+
+        ball.GetComponent<Rigidbody>().AddForce(180f,0f,0f);
+        Destroy(ball,3f);
     }
 
     void setAnimation(Image bar, float toValue){
