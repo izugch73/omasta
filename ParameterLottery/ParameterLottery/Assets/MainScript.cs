@@ -13,7 +13,7 @@ public class MainScript : MonoBehaviour
 {
 
     public Button shuffleButton;
-    public ButtonManagerBasic shuffleButtonText;
+    public TextMeshProUGUI shuffleButtonText;
     
     public Text speed;
     public Image spdBar;
@@ -38,10 +38,10 @@ public class MainScript : MonoBehaviour
             var m = (int)Handicap.value;
             var r = getRandomStatus(10 - m);
             if(r == null){
-                shuffleButtonText.buttonText = "MAKE SURE SETTING";
+                shuffleButtonText.text = "設定を確認";
                 return;
             }else{
-                shuffleButtonText.buttonText = "SHUFFLE";
+                shuffleButtonText.text = "シャッフル！";
             }
 
             speed.text = "-";
@@ -67,7 +67,7 @@ public class MainScript : MonoBehaviour
             }).AddTo(this);
 
             shuffleButton.interactable = false;
-            Observable.Timer(System.TimeSpan.FromSeconds(1.5f)).Subscribe(time=>{
+            Observable.Timer(System.TimeSpan.FromSeconds(1.25f)).Subscribe(time=>{
                 shuffleButton.interactable = true;
             }).AddTo(this);
         });
