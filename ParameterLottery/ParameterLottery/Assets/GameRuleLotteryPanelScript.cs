@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class GameRuleLotteryPanelScript : MonoBehaviour
     [SerializeField] private Text RuleText;
     [SerializeField] private Text RuleExplainText;
     [SerializeField] private Button LotteryButton;
+    [SerializeField] private TextMeshProUGUI LotteryButtonText;
 
     private void Start()
     {
@@ -21,11 +23,11 @@ public class GameRuleLotteryPanelScript : MonoBehaviour
         
         LotteryButton.onClick.AddListener(() =>
         {
-            LotteryButton.GetComponentInChildren<Text>().text = "抽選";
+            LotteryButtonText.text = "抽選";
 
             if (items.Count() < 2)
             {
-                LotteryButton.GetComponentInChildren<Text>().text = "ルール不足";
+                LotteryButtonText.text = "ルール不足";
             }
             else
             {
@@ -33,9 +35,6 @@ public class GameRuleLotteryPanelScript : MonoBehaviour
                 LotteryButton.interactable = false;
                 
                 var shuffled = items.OrderBy(i => Guid.NewGuid()).ToArray();
-                // var rule = shuffled.First();
-                // var ruleName = rule.transform.Find("Text").GetComponent<Text>().text;
-                // var ruleDetail = rule.transform.Find("Explain").GetComponent<Text>().text;
 
                 Observable.Timer(TimeSpan.FromSeconds(0.05f), TimeSpan.FromSeconds(0.05f))
                     .Take(20)
@@ -45,19 +44,7 @@ public class GameRuleLotteryPanelScript : MonoBehaviour
                         RuleText.text = shuffled[n % shuffled.Length].transform.Find("Text").GetComponent<Text>().text;
                         RuleExplainText.text = shuffled[n % shuffled.Length].transform.Find("Explain").GetComponent<Text>().text;
                     }).AddTo(this);
-
-
-
-
             }
-            
         });
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

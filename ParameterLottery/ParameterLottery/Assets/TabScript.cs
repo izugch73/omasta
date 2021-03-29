@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class TabScript : MonoBehaviour
     [SerializeField] private Button RuleGachaButton;
     [SerializeField] private GameObject RuleGachaPanel;
     [SerializeField] private GameObject RuleGachaSettingPanel;
-    [SerializeField] private Button LotteryButton;
+    [SerializeField] private TextMeshProUGUI LotteryButtonText;
 
     // Start is called before the first frame update
     private void Start()
@@ -31,7 +32,7 @@ public class TabScript : MonoBehaviour
         }
         else
         {
-            LotteryButton.GetComponentInChildren<Text>().text = "抽選";
+            LotteryButtonText.text = "抽選";
             RuleGachaPanel.SetActive(true);
             RuleGachaSettingPanel.SetActive(false);
         }
